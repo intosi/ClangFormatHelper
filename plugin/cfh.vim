@@ -11,7 +11,11 @@ fun! ClFormat()
         let l:lines=printf('%s:%s', v:lnum, v:lnum+v:count-1)
     endif
 
-    execute('pyf '.s:script_folder_path.'/../clang-format.py')
+    if has('python')
+        execute('pyf '.s:script_folder_path.'/../clang-format.py')
+    elseif has('python3')
+        execute('py3f '.s:script_folder_path.'/../clang-format.py')
+    endif
 endf
 
 let g:cfh_format_on_save = get(g:, 'cfh_format_on_save', 0)
